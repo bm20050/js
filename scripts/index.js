@@ -1,64 +1,49 @@
-//DOM 요소 생성 함수
-// function domAdd() {
-//     console.log('domAdd');
-// }
+const showDice = () => {
+    const n = Math.floor(Math.random() * 6) + 1;
+    const s1 = document.querySelector("#s1");
 
-const domAdd = () => {
-    console.log('domAdd');
-    const btn1 = document.createElement("button");
-    btn1.innerHTML = "버튼1";
-    btn1.id = "bt1";
-    btn1.className = "btc"
-    document.getElementById("content").append(btn1);
-
-    const btn2 = document.createElement("button");
-    btn2.innerHTML = "버튼2";
-    btn2.id = "bt2";
-    btn2.className = "btc"
-    document.getElementById("content").append(btn2);
-
-    const btn3 = document.createElement("button");
-    btn3.innerHTML = "버튼3";
-    btn3.id = "bt3";
-    btn3.className = "btc"
-    document.getElementById("content").append(btn3);
+    s1.innerHTML = `<img src="./images/${n}.png"`;
+    console.log(n);
+    return 
 }
 
-//DOM 요소 접근
-const domRead = () => {
-    const btc = document.querySelectorAll(".btc");
-    console.log(btc);
+//요소 보이기 함수
+const show = (dspS1, dspS2, dspS3, dspBt1, dspBt2) => {
+    const s1 = document.querySelector("#s1");
+    const s2 = document.querySelector("#s2");
+    const s3 = document.querySelector("#s3");
+    const bt1 = document.querySelector("#bt1");
+    const bt2 = document.querySelector("#bt2");
 
-    console.log("**for**");
-    //for 순회
-    for (let i = 0; i < btc.length; i++) {
-        console.log(btc[i]);
-    }
-
-    console.log("**for in**");
-    //for ... in 순회
-    for (let k in btc) {
-        console.log(btc[k]);
-        if (k == 1) break;
-    }
-
-    console.log("**foreach**");
-    //foreach 순회
-    btc.forEach((item, k) => console.log(item, k));
-
-    console.log("**for of**");
-    //for...of 
-    for (let [k, item] of btc.entries()) {
-        console.log(k, item.innerHTML);
-        if (k == 1) break;
-    }
+    s1.style.display = dspS1;
+    s2.style.display = dspS2;
+    s3.style.display = dspS3;
+    bt1.style.display = dspBt1;
+    bt2.style.display = dspBt2;
 }
 
-//자바스크립트 랜더링 제어
+const domUpdate = () => {
+    const s3 = document.querySelector("#s3")
+    const bt1 = document.querySelector("#bt1");
+    const bt2 = document.querySelector("#bt2");
+    let num;
+    bt1.addEventListener("click", () => {
+        num =showDice();
+    });
+    bt2.addEventListener("click", () => {
+        if (Node.checked) {
+            if(num == Node.value) {
+                s3.innerHTML = `<img src = "./images/o.png">`;
+            }
+            else {
+                s3.innerHTML = `<img src = "./images/x.png">`;
+            }
+        }
+        show("block", "none", "block", "block", "none");
+    });
+}
+//DOM 로드가 된 후 
 document.addEventListener("DOMContentLoaded", () => {
-    //DOM 요소 생성
-    domAdd();
-    domRead();
+    show("none", "block", "none", "block", "block");
+    domUpdate();
 });
-
-
